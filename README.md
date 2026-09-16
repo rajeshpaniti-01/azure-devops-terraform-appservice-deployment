@@ -14,6 +14,14 @@ This project showcases:
 
 ---
 
+## Live Demo
+
+The application is deployed and accessible through Azure App Service:
+
+🔗 https://express-app-cicd-app-service-dph2bwdnaua5cra2.centralindia-01.azurewebsites.net
+
+This deployment is fully automated using Azure DevOps CI/CD pipelines.
+
 
 ### High-Level Architecture
 
