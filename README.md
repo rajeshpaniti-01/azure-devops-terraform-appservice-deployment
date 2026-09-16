@@ -398,24 +398,8 @@ This project provided hands-on experience with:
 
 ---
 
-# Future Improvements
-
-Potential enhancements include:
-
-- Remote Terraform backend using Azure Storage Account
-- Multi-environment deployments (Dev/Test/Prod)
-- Terraform modules for reusable infrastructure components
-- Deployment slots for blue-green deployment
-- Azure Application Insights integration
-- Security scanning within CI pipelines
-- Automated rollback strategies
-- Containerization with Docker
-- Deployment to Azure Kubernetes Service (AKS)
-
----
-
 # Author
 
 **Rajesh Paniti**
 
-DevOps and Cloud Engineering enthusiast focused on Azure, Terraform, Linux, CI/CD, and Infrastructure Automation.
+
