@@ -1,0 +1,6 @@
+location              = "Central India"
+resource_group_name   = "express-app-cicd-app-service_group"
+app_service_plan_name = "ASP-expressappcicdappservicegroup-aedd"
+web_app_name          = "express-app-cicd-app-service"
+app_service_sku       = "B1"
+node_version          = "24-lts"

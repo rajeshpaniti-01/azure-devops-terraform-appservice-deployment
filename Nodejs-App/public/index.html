@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Azure CI/CD Project</title>
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header class="hero">
+      <div class="badge">NODE.JS • EXPRESS • AZURE</div>
+
+      <h1>Azure CI/CD Project</h1>
+
+      <p>
+        A simple web application deployed through an automated
+        CI/CD pipeline.
+      </p>
+    </header>
+
+
+    <section class="card">
+
+      <div class="card-header">
+        <h2>Application Status</h2>
+
+        <span id="statusIndicator" class="status unknown">
+          Checking...
+        </span>
+      </div>
+
+      <p id="statusMessage">
+        Checking the backend health...
+      </p>
+
+      <button id="checkHealthButton">
+        Check Health
+      </button>
+
+    </section>
+
+
+    <section class="card">
+
+      <h2>Project Information</h2>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+          <span class="label">Backend</span>
+          <span class="value">Node.js + Express</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Frontend</span>
+          <span class="value">HTML + CSS + JavaScript</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">CI/CD</span>
+          <span class="value">Azure DevOps</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Deployment</span>
+          <span class="value">Azure App Service</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="card pipeline-card">
+
+      <h2>Deployment Pipeline</h2>
+
+      <div class="pipeline">
+
+        <div class="pipeline-step">
+          <div class="step-number">1</div>
+          <strong>Code</strong>
+          <span>Git Push</span>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="pipeline-step">
+          <div class="step-number">2</div>
+          <strong>Build</strong>
+          <span>CI Pipeline</span>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="pipeline-step">
+          <div class="step-number">3</div>
+          <strong>Test</strong>
+          <span>Unit Tests</span>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="pipeline-step">
+          <div class="step-number">4</div>
+          <strong>Deploy</strong>
+          <span>Azure</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer>
+      <p> Built as a CI/CD learning project 🚀</p>
+    </footer>
+
+  </main>
+
+  <script src="/app.js"></script>
+
+</body>
+</html>
+ 

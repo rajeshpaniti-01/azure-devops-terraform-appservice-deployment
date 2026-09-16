@@ -1,0 +1,37 @@
+trigger: none
+
+resources:
+  pipelines:
+    - pipeline: ci
+      source: 'Node.js Web App'
+      trigger:
+        branches:
+          include:
+            - main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+
+- deployment: DeployToAppService
+  displayName: 'Deploy to Azure App Service'
+
+  environment: production
+
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+
+        - download: ci
+          artifact: webapp
+          displayName: 'Download CI artifact'
+
+        - task: AzureWebApp@1
+          inputs:
+            azureSubscription: 'azure-rm-sc'
+            appType: 'webAppLinux'
+            appName: 'express-app-cicd-app-service'
+            package: '$(Pipeline.Workspace)/ci/webapp'
+          displayName: 'Deploy to Azure App Service'

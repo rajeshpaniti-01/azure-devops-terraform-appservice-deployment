@@ -1,0 +1,80 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- bash: |
+    pwd
+    find . -name "*.tf"
+  displayName: Debug Location
+- bash: |
+    set -e
+
+    TERRAFORM_VERSION="1.9.8"
+
+    wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+    unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+    sudo mv terraform /usr/local/bin/
+
+    terraform version
+  displayName: 'Install Terraform'
+
+
+- task: AzureCLI@2
+  displayName: Terraform Init
+  inputs:
+    azureSubscription: terraform-azure-sc
+    addSpnToEnvironment: true
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      export ARM_USE_OIDC=true
+      export ARM_CLIENT_ID=$servicePrincipalId
+      export ARM_TENANT_ID=$tenantId
+      export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+      export ARM_OIDC_TOKEN=$idToken
+
+      terraform init
+
+- task: AzureCLI@2
+  displayName: Terraform Validate
+  inputs:
+    azureSubscription: terraform-azure-sc
+    addSpnToEnvironment: true
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      terraform validate
+
+- task: AzureCLI@2
+  displayName: Terraform Plan
+  inputs:
+    azureSubscription: terraform-azure-sc
+    addSpnToEnvironment: true
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      export ARM_USE_OIDC=true
+      export ARM_CLIENT_ID=$servicePrincipalId
+      export ARM_TENANT_ID=$tenantId
+      export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+      export ARM_OIDC_TOKEN=$idToken
+
+      terraform plan -out=tfplan -var-file=prod.tfvars
+      terraform show tfplan
+
+- bash: |
+    mkdir terraform-plan
+    cp tfplan terraform-plan/
+  displayName: Prepare Plan Artifact 
+    
+
+- task: PublishPipelineArtifact@1
+  displayName: Publish Artifact
+  inputs:
+    targetPath: terraform-plan
+    artifact: terraform-plan  
